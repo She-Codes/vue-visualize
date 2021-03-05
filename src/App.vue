@@ -19,7 +19,10 @@
     },
     methods: {
       async getPost() {
-        this.igPost = await fetch('.netlify/functions/ig-post').then((r) => r.json());
+        if (this.igUrl) {
+          this.igPost = await fetch(`.netlify/functions/ig-post?url=${this.igUrl}`)
+          .then((r) => r.json());
+        }
       }
     }
   }
