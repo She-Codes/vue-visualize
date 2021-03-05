@@ -4,9 +4,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "netlify": "netlify dev"
   },
   "dependencies": {
+    "node-fetch": "^2.6.1",
     "vue": "^3.0.5"
   },
   "devDependencies": {
