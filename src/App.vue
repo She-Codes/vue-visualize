@@ -4,7 +4,7 @@
     <button @click="getPost">Get Post</button>
 
     <div>
-      {{igPost}}
+      <img :src="postImage">
     </div>
   </div>
 </template>
@@ -14,14 +14,21 @@
     data () {
       return {
         igUrl: '',
-        igPost: ''
+        postImage: '',
+        postName: ''
       }
     },
     methods: {
       async getPost() {
         if (this.igUrl) {
-          this.igPost = await fetch(`.netlify/functions/ig-post?url=${this.igUrl}`)
-          .then((r) => r.json());
+          await fetch(`.netlify/functions/ig-post?url=${this.igUrl}`)
+          .then((r) => r.json())
+          .then(data => {
+            this.postName = data.author_name;
+            this.postImage = data.thumbnail_url;
+            // we need data.author_name and data.thumbnail_url
+          })
+          .catch(error => console.log(error));
         }
       }
     }
