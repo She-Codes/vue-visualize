@@ -21,14 +21,14 @@
     methods: {
       async getPost() {
         if (this.igUrl) {
-          await fetch(`.netlify/functions/ig-post?url=${this.igUrl}`)
-          .then((r) => r.json())
-          .then(data => {
+          try {
+            const response = await fetch(`.netlify/functions/ig-post?url=${this.igUrl}`);
+            const data = await response.json();
             this.postName = data.author_name;
             this.postImage = data.thumbnail_url;
-            // we need data.author_name and data.thumbnail_url
-          })
-          .catch(error => console.log(error));
+          } catch (error) {
+            console.log(error)
+          }
         }
       }
     }
