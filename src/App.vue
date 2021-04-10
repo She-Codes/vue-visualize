@@ -22,7 +22,7 @@
       async getPost() {
         if (this.igUrl) {
           try {
-            const response = await fetch(`.netlify/functions/ig-post?url=${this.igUrl}`);
+            const response = await fetch(`api/ig-post?url=${this.igUrl}`);
             const data = await response.json();
             this.postName = data.author_name;
             this.postImage = data.thumbnail_url;
