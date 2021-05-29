@@ -9,11 +9,15 @@ const apiUrl = 'https://graph.facebook.com/v9.0/instagram_oembed';
 exports.handler = async (event) => {
   const {queryStringParameters: {url: postUrl}} = event;
   const path = `${apiUrl}?url=${postUrl}&access_token=${ACCESS_TOKEN}`;
-  const response = await fetch(path)
-  .then((response) => response.json())
-  .catch((error) => console.log('error', error));
-  return {
-    statusCode: 200,
-    body: JSON.stringify(response)
+
+  try {
+    const response = await fetch(path);
+    const data = await response.json();
+    return {
+      statusCode: 200,
+      body: JSON.stringify(data)
+    }
+  } catch (error) {
+    console.log(error);
   }
 }

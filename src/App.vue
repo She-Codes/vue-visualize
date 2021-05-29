@@ -25,21 +25,24 @@
 
         if (this.posts[this.postUrl]) {
           console.log("You've saved this before, save again?");
+          // if they do save again, I can't use the same key...
           return;
         }
 
         if (this.postUrl) {
-          await fetch(`.netlify/functions/ig-post?url=${this.postUrl}`)
-          .then((r) => r.json())
-          .then(data => {
+          try {
+            const response = await fetch(`.netlify/functions/ig-post?url=${this.postUrl}`);
+            const data = await response.json();
+            
             console.log(data);
-  
+
             vm.posts[this.postUrl] = {
               postImage: data.thumbnail_url,
               postAuthor: data.author_name
             }
-          })
-          .catch(error => console.log(error));
+          } catch (error) {
+            console.log(error)
+          }
         }
       }
     }

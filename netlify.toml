@@ -6,10 +6,10 @@ publish = "dist"
 
 ## Uncomment to use this redirect for Single Page Applications like create-react-app.
 ## Not needed for static site generators.
-# [[redirects]]
-# from = "/*"
-# status = 200
-# to = "/index.html"
+[[redirects]]
+from = "/api/*"
+status = 200
+to = "/.netlify/functions/:splat"
 
 ## (optional) Settings for Netlify Dev
 ## https://github.com/netlify/cli/blob/master/docs/netlify-dev.md#project-detection
