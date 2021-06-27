@@ -26,3 +26,5 @@
 - Using a redirect in the netlify.toml to shorten api url to `/api/ig-post?url=[igUrl]`
 - Whenever i push to github the site is redeployed
 - Using the `node-fetch` package in my `ig-post.js` serverless function file in order to use `fetch` with Node.
+
+## Discontinued development due to IG API becoming too restrictive
