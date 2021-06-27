@@ -1,11 +1,13 @@
 <template>
   <div>
-    <input v-model="igUrl" class="border border-indigo-400">
-    <button @click="getPost">Get Post</button>
+    <header>
+      <input v-model="postUrl" class="border border-indigo-400">
+      <button @click="getPost">Get Post</button>
+    </header>
 
-    <div>
-      <img :src="postImage">
-    </div>
+    <main>
+      <img v-for="(post, url) in posts" :key="url" :src="post.postImage">
+    </main>
   </div>
 </template>
 
@@ -13,19 +15,32 @@
   export default {
     data () {
       return {
-        igUrl: '',
-        postImage: '',
-        postName: ''
+        postUrl: '',
+        posts: {}
       }
     },
     methods: {
       async getPost() {
-        if (this.igUrl) {
+        const vm = this;
+
+        if (!this.postUrl) return;
+
+        if (this.posts[this.postUrl]) {
+          console.log("You've already captured this vision!");
+          return;
+        }
+
+        if (this.postUrl) {
           try {
-            const response = await fetch(`api/ig-post?url=${this.igUrl}`);
+            const response = await fetch(`.netlify/functions/ig-post?url=${this.postUrl}`);
             const data = await response.json();
-            this.postName = data.author_name;
-            this.postImage = data.thumbnail_url;
+            
+            console.log(data);
+
+            vm.posts[this.postUrl] = {
+              postImage: data.thumbnail_url,
+              postAuthor: data.author_name
+            }
           } catch (error) {
             console.log(error)
           }
