@@ -1,5 +1,6 @@
 <template>
   <div>
+<<<<<<< HEAD
     <header>
       <input v-model="postUrl" class="border border-indigo-400">
       <button @click="getPost">Get Post</button>
@@ -8,6 +9,14 @@
     <main>
       <img v-for="(post, url) in posts" :key="url" :src="post.postImage">
     </main>
+=======
+    <input v-model="postUrl" class="border border-indigo-400">
+    <button @click="getPost">Get Post</button>
+
+    <div>
+      <img v-for="(post, url) in posts" :key="url" :src="post.postImage">
+    </div>
+>>>>>>> 6cb72782e4ff0a33f25805192d0dad37055d48a6
   </div>
 </template>
 
@@ -26,7 +35,12 @@
         if (!this.postUrl) return;
 
         if (this.posts[this.postUrl]) {
+<<<<<<< HEAD
           console.log("You've already captured this vision!");
+=======
+          console.log("You've saved this before, save again?");
+          // if they do save again, I can't use the same key...
+>>>>>>> 6cb72782e4ff0a33f25805192d0dad37055d48a6
           return;
         }
 
